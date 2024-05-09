@@ -68,7 +68,7 @@ services:
       - ORDERER_ADMIN_TLS_ROOTCAS=[/etc/hyperledger/orderer/tls/ca.crt]
       - ORDERER_ADMIN_TLS_CLIENTROOTCAS=[/etc/hyperledger/orderer/tls/ca.crt]
     working_dir: /opt/gopath/src/github.com/hyperledger/fabric/orderer
-    command: orderer
+y    command: orderer
     volumes:
         - ../crypto-material/:/etc/hyperledger/configtx
         - ../crypto-material/crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/:/etc/hyperledger/peerOrg1
