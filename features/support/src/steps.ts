@@ -51,7 +51,7 @@ BeforeAll(function (): void {
   fabric = new Fabric();
 });
 
-AfterAll(function (this: CustomWorld): void {
+AfterAll(function (): void {
   fabric.dockerDown();
 });
 
