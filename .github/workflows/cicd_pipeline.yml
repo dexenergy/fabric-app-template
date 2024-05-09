@@ -1,0 +1,46 @@
+name: Test
+on: 
+  push:
+    branches:
+      - main
+env:
+  DEFAULT_GO_VERSION: '1.21'
+
+jobs:
+  unit:
+    runs-on: ubuntu-22.04
+    name: Unit tests
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version:
+          - 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Run Contracts unit tests
+        run: make unit-test-contracts
+      - name: Run Apps unit tests
+        run: make unit-test-apps        
+  scenario:
+    runs-on: ubuntu-22.04
+    name: Scenario tests
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version:
+          - 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: Pull Fabric Docker images
+        run: make pull-latest-peer  
+      - name: Run Fabric scenario tests
+        run: make scenario-test-contracts
+      - name: Run App scenario tests
+        run: make scenario-test-apps
+
