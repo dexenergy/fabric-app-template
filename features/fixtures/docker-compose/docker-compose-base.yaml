@@ -83,6 +83,7 @@ services:
       - CORE_PEER_GOSSIP_ORGLEADER=true
       - CORE_PEER_GOSSIP_USELEADERELECTION=false
       - CORE_PEER_PROFILE_ENABLED=true
+      - FABRIC_CFG_PATH=/etc/hyperledger/peercfg
       # LOGGING SETTINGS
       - FABRIC_LOGGING_SPEC=${DOCKER_DEBUG}
       # TLS SETTINGS
@@ -97,6 +98,8 @@ services:
     command: peer node start
     volumes:
       - ${DOCKER_SOCK}:/host/var/run/docker.sock
+      - ../crypto-material/peercfg:/etc/hyperledger/peercfg
+
 
   clibase:
     extends:
